@@ -1,10 +1,14 @@
 /**
  * Created by Luteh on 14/06/2017.
  */
+import {EMAIL_CHANGED} from '../actions/types';
+
 const INITIAL_STATE = {email: ''};
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case EMAIL_CHANGED:
+
         default:
             return state
     }
