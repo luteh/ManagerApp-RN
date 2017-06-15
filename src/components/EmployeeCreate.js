@@ -2,7 +2,7 @@
  * Created by Luteh on 15/06/2017.
  */
 import React, {Component} from 'react';
-import {Picker} from 'react-native';
+import {Picker, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {employeeUpdate} from '../actions';
 import {CardSection, Card, Input, Button} from './common';
@@ -29,8 +29,9 @@ class EmployeeCreate extends Component {
                 </CardSection>
 
                 <CardSection>
+                    <Text style={styles.pickerTextStyle}>Shift</Text>
                     <Picker
-                        style={{flex: 1}}
+                        style={{flex: 2}}
                         selectedValue={this.props.shift}
                         onValueChange={value => this.props.employeeUpdate({prop: 'shift', value})}
                     >
@@ -53,6 +54,15 @@ class EmployeeCreate extends Component {
         )
     }
 }
+
+const styles = {
+    pickerTextStyle: {
+        flex: 1,
+        fontSize: 18,
+        paddingLeft: 20,
+        alignSelf:'center'
+    }
+};
 
 const mapStateToProps = (state) => {
     const {name, phone, shift} = state.employeeForm;
