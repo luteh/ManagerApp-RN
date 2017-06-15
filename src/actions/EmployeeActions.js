@@ -1,7 +1,7 @@
 /**
  * Created by Luteh on 15/06/2017.
  */
-import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH, EMPLOYEES_FETCH_SUCCESS} from './types';
+import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS} from './types';
 import {Actions} from 'react-native-router-flux';
 import firebase from 'firebase';
 
