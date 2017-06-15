@@ -1,7 +1,7 @@
 /**
  * Created by Luteh on 15/06/2017.
  */
-import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE} from './types';
+import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH} from './types';
 import {Actions} from 'react-native-router-flux';
 import firebase from 'firebase';
 
@@ -20,6 +20,16 @@ export const employeeCreate = ({name, phone, shift}) => {
             .then(() => {
                 dispatch({type: EMPLOYEE_CREATE});
                 Actions.employeeList({type: 'reset'});
+            })
+    }
+};
+
+export const employeesFetch = () => {
+    const {currentUser} = firebase.auth();
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employee`)
+            .on('value', snapshot => {
+                dispatch({type: EMPLOYEES_FETCH, payload: snapshot.val()});
             })
     }
 };
