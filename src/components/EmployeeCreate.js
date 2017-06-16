@@ -3,11 +3,15 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {employeeUpdate, employeeCreate} from '../actions';
-import {CardSection, Card, Input, Button} from './common';
+import {employeeUpdate, employeeCreate, employeeDeleteProps} from '../actions';
+import {CardSection, Card, Button} from './common';
 import EmployeeFrom from './EmployeeForm';
 
 class EmployeeCreate extends Component {
+    componentWillMount(){
+        this.props.employeeDeleteProps();
+    }
+
     onButtonPress() {
         const {name, phone, shift} = this.props;
         this.props.employeeCreate({name, phone, shift: shift || 'Monday'});
@@ -33,4 +37,4 @@ const mapStateToProps = (state) => {
     return {name, phone, shift}
 };
 
-export default connect(mapStateToProps, {employeeUpdate, employeeCreate})(EmployeeCreate);
+export default connect(mapStateToProps, {employeeUpdate, employeeCreate, employeeDeleteProps})(EmployeeCreate);

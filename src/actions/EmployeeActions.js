@@ -1,7 +1,7 @@
 /**
  * Created by Luteh on 15/06/2017.
  */
-import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS} from './types';
+import {EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS, EMPLOYEE_SAVE_SUCCESS, EMPLOYEE_DELETE_PROPS} from './types';
 import {Actions} from 'react-native-router-flux';
 import firebase from 'firebase';
 
@@ -36,9 +36,18 @@ export const employeesFetch = () => {
 
 export const employeeSave = ({name, phone, shift, uid}) => {
     const {currentUser} = firebase.auth();
-    return () => {
+    return (dispatch) => {
         firebase.database().ref(`/users/${currentUser.uid}/employee/${uid}`)
             .set({name, phone, shift})
-            .then(() => console.log("Save Success!"));
+            .then(() => {
+                dispatch({type: EMPLOYEE_SAVE_SUCCESS});
+                Actions.employeeList({type: 'reset'});
+            });
+    }
+};
+
+export const employeeDeleteProps = () => {
+    return {
+        type: EMPLOYEE_DELETE_PROPS
     }
 };
